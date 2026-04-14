@@ -72,13 +72,11 @@ footer a { color: var(--brand); }
   <h1>Secufer — Suivi des attestations et recyclages</h1>
   <p class="lead">
     Mini-outil open-source qui aide les services <strong>RH</strong> à suivre
-    les attestations délivrées par
-    <a href="https://centre-secufer.fr" title="Centre de formation Secufer">Secufer</a>
-    (validité <strong>3 ans</strong>) et à <strong>programmer les recyclages</strong>
-    avant expiration.
+    les attestations Secufer (validité <strong>3 ans</strong>) et à
+    <strong>programmer les recyclages</strong> avant expiration.
   </p>
   <p>
-    <a class="cta" href="https://centre-secufer.fr">Voir le catalogue de formations sur centre-secufer.fr</a>
+    <a class="cta" href="https://centre-secufer.fr">Consulter le catalogue de formations</a>
     <a class="cta secondary" href="https://github.com/Adevis/Secufer">Code source sur GitHub</a>
   </p>
 </header>
@@ -87,8 +85,7 @@ footer a { color: var(--brand); }
 
 <h2>À qui s'adresse cet outil</h2>
 <p>
-  Les formations dispensées par le
-  <a href="https://centre-secufer.fr">centre de formation Secufer</a>
+  Les formations dispensées par le centre de formation Secufer
   (habilitations électriques, SST, CACES, travail en hauteur, etc.)
   donnent lieu à une attestation d'une durée de validité limitée —
   typiquement <strong>3 ans</strong>. Passé ce délai, le salarié doit
@@ -97,8 +94,7 @@ footer a { color: var(--brand); }
 <p>
   Cet outil permet aux équipes RH de centraliser les attestations, de
   détecter celles qui approchent de l'expiration, et d'anticiper la
-  planification des recyclages auprès de
-  <a href="https://centre-secufer.fr">centre-secufer.fr</a>.
+  planification des recyclages.
 </p>
 
 <h2>Fonctionnalités</h2>
@@ -116,7 +112,7 @@ footer a { color: var(--brand); }
   <thead><tr><th>Statut</th><th>Signification</th></tr></thead>
   <tbody>
     <tr class="status-valide"><td><code>valide</code></td><td>Expire dans plus de 90 jours</td></tr>
-    <tr class="status-programmer"><td><code>à programmer</code></td><td>Expire dans 30 à 90 jours — contacter <a href="https://centre-secufer.fr">centre-secufer.fr</a> pour un recyclage</td></tr>
+    <tr class="status-programmer"><td><code>à programmer</code></td><td>Expire dans 30 à 90 jours — planifier le recyclage</td></tr>
     <tr class="status-urgent"><td><code>urgent</code></td><td>Expire dans moins de 30 jours</td></tr>
     <tr class="status-expire"><td><code>expirée</code></td><td>Date dépassée — salarié non habilité</td></tr>
   </tbody>
@@ -145,24 +141,18 @@ python -m secufer_tracker report --output rapport.html</code></pre>
 <h2>Programmer un recyclage</h2>
 <p>
   Une fois l'attestation détectée comme « à programmer » ou « urgent »,
-  contactez le centre Secufer pour inscrire le salarié à la session de
-  recyclage appropriée. Toutes les informations de contact et le
-  catalogue des formations sont disponibles sur le site officiel :
-  <a href="https://centre-secufer.fr"><strong>centre-secufer.fr</strong></a>.
+  contactez le centre pour inscrire le salarié à la session de recyclage
+  appropriée. Toutes les informations de contact et le catalogue des
+  formations sont disponibles sur le
+  <a href="https://centre-secufer.fr">site officiel du centre Secufer</a>.
 </p>
-
-<h2>En savoir plus</h2>
-<ul>
-  <li><a href="https://centre-secufer.fr">centre-secufer.fr</a> — site officiel du centre de formation</li>
-  <li><a href="https://github.com/Adevis/Secufer">github.com/Adevis/Secufer</a> — code source et issues</li>
-</ul>
 
 </main>
 
 <footer>
   <p>
     Projet maintenu par Secufer. Pour toute question relative aux
-    formations, recyclages ou attestations, rendez-vous sur
+    formations, recyclages ou attestations, voir
     <a href="https://centre-secufer.fr">centre-secufer.fr</a>.
   </p>
 </footer>

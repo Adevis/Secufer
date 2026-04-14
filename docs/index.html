@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secufer — Suivi des attestations et recyclages | centre-secufer.fr</title>
+<meta name="description" content="Outil open-source pour le suivi RH des attestations Secufer (validité 3 ans) et la programmation des recyclages. Formations et recyclages sur centre-secufer.fr.">
+<link rel="canonical" href="https://adevis.github.io/Secufer/">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Secufer — Suivi des attestations et recyclages">
+<meta property="og:description" content="Outil RH pour suivre les attestations Secufer et planifier les recyclages. Formations sur centre-secufer.fr.">
+<meta property="og:url" content="https://adevis.github.io/Secufer/">
+<meta property="og:site_name" content="Secufer">
+<meta property="og:locale" content="fr_FR">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Secufer — Suivi des attestations et recyclages">
+<meta name="twitter:description" content="Outil RH pour suivre les attestations Secufer et planifier les recyclages.">
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Secufer Tracker",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Cross-platform",
+  "description": "Outil de suivi RH des attestations Secufer (validité 3 ans) et de programmation des recyclages.",
+  "url": "https://adevis.github.io/Secufer/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Secufer",
+    "url": "https://centre-secufer.fr"
+  },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+}
+</script>
+
+<style>
+:root { --brand: #0b5fff; --ink: #1a1f2c; --muted: #5b6472; --bg: #f7f9fc; --ok: #e6f4ea; --warn: #fff6cc; --urgent: #fde7c7; --bad: #fde2e1; }
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0; color: var(--ink); background: var(--bg); line-height: 1.55; }
+header, main, footer { max-width: 880px; margin: 0 auto; padding: 1.5rem 1.25rem; }
+header { padding-top: 3rem; }
+h1 { font-size: 2.1rem; margin: 0 0 .5rem; }
+h2 { font-size: 1.35rem; margin-top: 2.2rem; border-bottom: 1px solid #dde3ec; padding-bottom: .35rem; }
+p.lead { font-size: 1.1rem; color: var(--muted); margin-top: 0; }
+a { color: var(--brand); }
+a:hover { text-decoration: underline; }
+.cta { display: inline-block; background: var(--brand); color: #fff; padding: .65rem 1.1rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin-right: .5rem; }
+.cta.secondary { background: #fff; color: var(--brand); border: 1px solid var(--brand); }
+pre { background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: .9rem; }
+code { font-family: "SF Mono", Menlo, Consolas, monospace; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+th, td { border: 1px solid #dde3ec; padding: .5rem .7rem; text-align: left; }
+th { background: #eef2f8; }
+.status-valide { background: var(--ok); }
+.status-programmer { background: var(--warn); }
+.status-urgent { background: var(--urgent); }
+.status-expire { background: var(--bad); }
+footer { border-top: 1px solid #dde3ec; color: var(--muted); font-size: .9rem; margin-top: 3rem; }
+footer a { color: var(--brand); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Secufer — Suivi des attestations et recyclages</h1>
+  <p class="lead">
+    Mini-outil open-source qui aide les services <strong>RH</strong> à suivre
+    les attestations Secufer (validité <strong>3 ans</strong>) et à
+    <strong>programmer les recyclages</strong> avant expiration.
+  </p>
+  <p>
+    <a class="cta" href="https://centre-secufer.fr">Consulter le catalogue de formations</a>
+    <a class="cta secondary" href="https://github.com/Adevis/Secufer">Code source sur GitHub</a>
+  </p>
+</header>
+
+<main>
+
+<h2>À qui s'adresse cet outil</h2>
+<p>
+  Les formations dispensées par le centre de formation Secufer
+  (habilitations électriques, SST, CACES, travail en hauteur, etc.)
+  donnent lieu à une attestation d'une durée de validité limitée —
+  typiquement <strong>3 ans</strong>. Passé ce délai, le salarié doit
+  suivre un <em>recyclage</em> pour rester habilité.
+</p>
+<p>
+  Cet outil permet aux équipes RH de centraliser les attestations, de
+  détecter celles qui approchent de l'expiration, et d'anticiper la
+  planification des recyclages.
+</p>
+
+<h2>Fonctionnalités</h2>
+<ul>
+  <li>Enregistrement des attestations (nom, formation, date de délivrance, email).</li>
+  <li>Calcul automatique de la date d'expiration (+ 3 ans).</li>
+  <li>Statut calculé : <code>valide</code>, <code>à programmer</code>, <code>urgent</code>, <code>expirée</code>.</li>
+  <li>Liste filtrée des attestations qui expirent sous X jours.</li>
+  <li>Enregistrement des recyclages (réinitialise la date de référence).</li>
+  <li>Export d'un rapport HTML coloré par statut, prêt à diffuser.</li>
+</ul>
+
+<h2>Statuts</h2>
+<table>
+  <thead><tr><th>Statut</th><th>Signification</th></tr></thead>
+  <tbody>
+    <tr class="status-valide"><td><code>valide</code></td><td>Expire dans plus de 90 jours</td></tr>
+    <tr class="status-programmer"><td><code>à programmer</code></td><td>Expire dans 30 à 90 jours — planifier le recyclage</td></tr>
+    <tr class="status-urgent"><td><code>urgent</code></td><td>Expire dans moins de 30 jours</td></tr>
+    <tr class="status-expire"><td><code>expirée</code></td><td>Date dépassée — salarié non habilité</td></tr>
+  </tbody>
+</table>
+
+<h2>Installation et usage</h2>
+<p>Python 3.10+, aucune dépendance externe.</p>
+<pre><code>git clone https://github.com/Adevis/Secufer.git
+cd Secufer
+
+# Ajouter une attestation
+python -m secufer_tracker add \
+    --nom Durand --prenom Alice \
+    --formation "Habilitation B1V" \
+    --date-delivrance 2024-04-15
+
+# Lister les attestations qui expirent dans les 6 mois
+python -m secufer_tracker expiring --days 180
+
+# Enregistrer un recyclage
+python -m secufer_tracker renew --id &lt;id&gt; --date-recyclage 2027-03-10
+
+# Générer un rapport HTML
+python -m secufer_tracker report --output rapport.html</code></pre>
+
+<h2>Programmer un recyclage</h2>
+<p>
+  Une fois l'attestation détectée comme « à programmer » ou « urgent »,
+  contactez le centre pour inscrire le salarié à la session de recyclage
+  appropriée. Toutes les informations de contact et le catalogue des
+  formations sont disponibles sur le
+  <a href="https://centre-secufer.fr">site officiel du centre Secufer</a>.
+</p>
+
+</main>
+
+<footer>
+  <p>
+    Projet maintenu par Secufer. Pour toute question relative aux
+    formations, recyclages ou attestations, voir
+    <a href="https://centre-secufer.fr">centre-secufer.fr</a>.
+  </p>
+</footer>
+
+</body>
+</html>

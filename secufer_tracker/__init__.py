@@ -1,4 +1,4 @@
-"""Secufer Tracker — suivi des attestations Secufer et de leurs recyclages."""
+"""Secufer Tracker : suivi des attestations Secufer et de leurs recyclages."""
 
 from .tracker import (
     Attestation,

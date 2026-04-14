@@ -57,7 +57,7 @@ def cmd_add(args: argparse.Namespace) -> int:
         notes=args.notes or "",
     )
     store.add(attestation)
-    print(f"Attestation ajoutée (id={attestation.id}) — expire le {attestation.date_expiration.isoformat()}.")
+    print(f"Attestation ajoutée (id={attestation.id}) ; expire le {attestation.date_expiration.isoformat()}.")
     return 0
 
 
@@ -93,8 +93,8 @@ def cmd_renew(args: argparse.Namespace) -> int:
     store = AttestationStore(args.db)
     attestation = store.renew(args.id, args.date_recyclage)
     print(
-        f"Recyclage enregistré pour {attestation.prenom} {attestation.nom} — "
-        f"nouvelle expiration : {attestation.date_expiration.isoformat()}."
+        f"Recyclage enregistré pour {attestation.prenom} {attestation.nom}. "
+        f"Nouvelle expiration : {attestation.date_expiration.isoformat()}."
     )
     return 0
 
@@ -141,7 +141,7 @@ def _render_html(attestations: list[Attestation], today: date) -> str:
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Suivi des attestations Secufer — {today.isoformat()}</title>
+<title>Suivi des attestations Secufer ({today.isoformat()})</title>
 <style>
 body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #222; }}
 h1 {{ margin-bottom: .25rem; }}
@@ -159,7 +159,7 @@ a {{ color: #0b5fff; }}
 </head>
 <body>
 <h1>Suivi des attestations Secufer</h1>
-<p class="meta">Rapport généré le {today.isoformat()} — validité {3} ans.</p>
+<p class="meta">Rapport généré le {today.isoformat()}. Validité : {3} ans.</p>
 <table>
 <thead>
 <tr><th>Nom</th><th>Prénom</th><th>Email</th><th>Formation</th>

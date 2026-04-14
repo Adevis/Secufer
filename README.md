@@ -1,4 +1,4 @@
-# Secufer — Suivi des attestations
+# Secufer : suivi des attestations
 
 Mini-outil destiné aux **services RH** pour suivre les attestations
 délivrées par [Secufer](https://centre-secufer.fr) (validité **3 ans**)
@@ -33,7 +33,7 @@ cd secufer
 
 Toutes les commandes s'exécutent via `python -m secufer_tracker`. Les
 données sont stockées dans un fichier CSV (par défaut `attestations.csv`
-dans le répertoire courant) — facile à ouvrir avec Excel / LibreOffice
+dans le répertoire courant). Il est facile à ouvrir avec Excel ou LibreOffice
 et à sauvegarder.
 
 ### Ajouter une attestation
@@ -57,9 +57,9 @@ Chaque ligne indique la date d'expiration calculée et le statut :
 | Statut         | Signification                                   |
 | -------------- | ----------------------------------------------- |
 | `valide`       | Expire dans plus de 90 jours                    |
-| `À PROGRAMMER` | Expire dans 30 à 90 jours — planifier le recyclage |
+| `À PROGRAMMER` | Expire dans 30 à 90 jours : planifier le recyclage |
 | `URGENT`       | Expire dans moins de 30 jours                   |
-| `EXPIRÉE`      | Date dépassée — salarié non habilité            |
+| `EXPIRÉE`      | Date dépassée : salarié non habilité            |
 
 ### Lister les attestations qui expirent bientôt
 
@@ -120,5 +120,5 @@ python -m unittest discover -s tests -v
 
 ## Licence
 
-Usage interne Secufer — voir <https://centre-secufer.fr> pour toute
+Usage interne Secufer. Voir <https://centre-secufer.fr> pour toute
 question relative aux formations et attestations.

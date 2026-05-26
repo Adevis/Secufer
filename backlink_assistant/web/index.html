@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Assistant de backlinks</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Assistant de backlinks</h1>
+    <p class="tagline">Le robot trouve, classe et prépare les annuaires.
+      Vous validez l'envoi. Liens propres et durables.</p>
+  </header>
+
+  <nav class="tabs">
+    <button data-tab="sites" class="active">Mes sites</button>
+    <button data-tab="today">Aujourd'hui</button>
+    <button data-tab="opportunities">Opportunités</button>
+    <button data-tab="tracker">Suivi</button>
+  </nav>
+
+  <main>
+    <section id="tab-sites" class="tab active">
+      <h2>Ajouter / choisir un site</h2>
+      <form id="site-form" class="card">
+        <div class="row">
+          <label>Nom du site *<input name="name" required /></label>
+          <label>URL *<input name="url" placeholder="https://exemple.fr" required /></label>
+        </div>
+        <div class="row">
+          <button type="button" id="analyze-btn" class="secondary">
+            Analyser l'URL (détecter la thématique)
+          </button>
+          <span id="analyze-status" class="hint"></span>
+        </div>
+        <label>Description
+          <textarea name="description" rows="3"></textarea></label>
+        <label>Mots-clés (séparés par des virgules)
+          <input name="keywords" /></label>
+        <div class="row">
+          <label>Catégorie<input name="category" /></label>
+          <label>Pays<input name="country" value="FR" /></label>
+        </div>
+        <div class="row">
+          <label>Email de contact<input name="contact_email" type="email" /></label>
+          <label>Téléphone<input name="phone" /></label>
+        </div>
+        <div class="row">
+          <label>Adresse<input name="address" /></label>
+          <label>Ville<input name="city" /></label>
+        </div>
+        <button type="submit">Enregistrer le site</button>
+      </form>
+
+      <h2>Sites enregistrés</h2>
+      <div id="site-list" class="list"></div>
+    </section>
+
+    <section id="tab-today" class="tab">
+      <h2>Soumission du jour</h2>
+      <p class="hint">Un backlink par jour, tranquillement. Voici la meilleure
+        opportunité encore à traiter pour le site sélectionné.</p>
+      <div id="today-content" class="card"></div>
+    </section>
+
+    <section id="tab-opportunities" class="tab">
+      <h2>Opportunités d'annuaires</h2>
+      <p class="hint" id="opp-site-label"></p>
+      <div id="opp-list" class="list"></div>
+    </section>
+
+    <section id="tab-tracker" class="tab">
+      <h2>Suivi des soumissions</h2>
+      <div id="tracker-list" class="list"></div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <button id="modal-close" class="modal-close">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

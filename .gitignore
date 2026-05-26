@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
 .venv/
-attestations.csv
-rapport_attestations.html
+backlinks.db
+*.sqlite
+*.sqlite3

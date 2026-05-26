@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://adevis.github.io/Secufer/sitemap.xml

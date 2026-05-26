@@ -1,116 +1,69 @@
-# Secufer : suivi des attestations
+# Assistant de backlinks
 
-Mini-outil destiné aux **services RH** pour suivre les attestations
-délivrées par [Secufer](https://centre-secufer.fr) (validité **3 ans**)
-et anticiper la programmation des **recyclages** avant leur expiration.
+Outil d'aide à la création de **backlinks légitimes** : le système trouve les
+annuaires et plateformes pertinents pour la thématique d'un site, prépare des
+fiches prêtes à soumettre, et suit l'avancement des soumissions.
 
-Chaque attestation délivrée à l'issue d'une formation (habilitations,
-SST, CACES, travail en hauteur, etc.) a une durée de validité limitée.
-Passé ce délai, le salarié doit être recyclé pour rester habilité. Cet
-outil permet aux RH :
+## Philosophie : pas de spam
 
-- d'enregistrer les attestations au fil de leur délivrance,
-- de lister en un coup d'œil les attestations **à recycler prochainement**,
-- d'enregistrer les recyclages effectués (nouvelle date de référence),
-- de générer un **rapport HTML** à diffuser en interne.
+L'outil **ne soumet jamais un formulaire à votre place sur un site tiers**, et
+ce quel que soit le rythme. La frontière n'est pas le volume mais le
+consentement : poster des liens sur des sites qui ne vous appartiennent pas,
+sans qu'ils l'autorisent, est du spam et finit pénalisé par les moteurs de
+recherche.
 
-Pour le catalogue des formations et la prise de rendez-vous pour un
-recyclage, voir le site du centre : <https://centre-secufer.fr>.
+Le partage des rôles est donc :
+
+- 🤖 **Le robot** : détecte la thématique, trouve et classe les annuaires,
+  prépare le contenu de chaque fiche, suit les statuts.
+- 🔌 **Envoi automatique** : uniquement via les **API officielles** des
+  plateformes qui l'autorisent explicitement (Google Business Profile, Bing
+  Places, agrégateurs type Yext, plateformes de contenu type dev.to…).
+- 🖐️ **Vous** : pour les annuaires à simple formulaire web, l'outil prépare
+  tout (champs prêts à coller, lien direct) et **vous validez l'envoi** —
+  quelques secondes par soumission.
 
 ## Prérequis
 
 - Python 3.10+
 - Aucune dépendance externe (bibliothèque standard uniquement)
 
-## Installation
+## Lancement
 
 ```bash
-git clone https://github.com/adevis/secufer.git
-cd secufer
+python -m backlink_assistant
 ```
+
+Puis ouvrez http://127.0.0.1:8000 dans votre navigateur.
+
+Options :
+
+```bash
+python -m backlink_assistant --port 8080 --db mon_projet.db
+```
+
+Les données sont stockées en local dans un fichier SQLite (`backlinks.db` par
+défaut). Rien n'est envoyé ailleurs.
 
 ## Utilisation
 
-Toutes les commandes s'exécutent via `python -m secufer_tracker`. Les
-données sont stockées dans un fichier CSV (par défaut `attestations.csv`
-dans le répertoire courant). Il est facile à ouvrir avec Excel ou LibreOffice
-et à sauvegarder.
+1. **Mes sites** — ajoutez un site. Le bouton « Analyser l'URL » télécharge la
+   page et propose une thématique (titre, description, mots-clés). Si l'accès
+   internet n'est pas disponible, saisissez les mots-clés à la main.
+2. **Opportunités** — le système classe les annuaires par pertinence pour le
+   site sélectionné, avec des badges (API officielle / soumission manuelle,
+   gratuit / payant, type de lien). « Préparer la fiche » ouvre les champs
+   prêts à coller.
+3. **Aujourd'hui** — propose la meilleure soumission encore à traiter, pour
+   avancer d'un backlink par jour.
+4. **Suivi** — l'état de chaque soumission : à faire → soumis → validé.
 
-### Ajouter une attestation
+## Catalogue d'annuaires
 
-```bash
-python -m secufer_tracker add \
-    --nom Durand --prenom Alice \
-    --email alice.durand@entreprise.fr \
-    --formation "Habilitation électrique B1V" \
-    --date-delivrance 2024-04-15
-```
-
-### Lister toutes les attestations
-
-```bash
-python -m secufer_tracker list
-```
-
-Chaque ligne indique la date d'expiration calculée et le statut :
-
-| Statut         | Signification                                   |
-| -------------- | ----------------------------------------------- |
-| `valide`       | Expire dans plus de 90 jours                    |
-| `À PROGRAMMER` | Expire dans 30 à 90 jours : planifier le recyclage |
-| `URGENT`       | Expire dans moins de 30 jours                   |
-| `EXPIRÉE`      | Date dépassée : salarié non habilité            |
-
-### Lister les attestations qui expirent bientôt
-
-```bash
-# Par défaut : horizon 90 jours
-python -m secufer_tracker expiring
-
-# Horizon personnalisé (ex. semestre)
-python -m secufer_tracker expiring --days 180
-```
-
-### Enregistrer un recyclage
-
-Quand un salarié repasse sa formation, on met à jour la date de
-référence. L'expiration est alors recalculée automatiquement (date du
-recyclage + 3 ans).
-
-```bash
-python -m secufer_tracker renew --id 95341829 --date-recyclage 2027-03-10
-```
-
-### Générer un rapport HTML
-
-Un rapport coloré par statut, prêt à imprimer ou à envoyer :
-
-```bash
-python -m secufer_tracker report --output rapport_attestations.html
-```
-
-Le rapport contient un lien direct vers
-[centre-secufer.fr](https://centre-secufer.fr) pour faciliter la prise
-de contact en vue des recyclages.
-
-### Supprimer une attestation
-
-```bash
-python -m secufer_tracker remove --id 95341829
-```
-
-## Format des données
-
-Le fichier CSV utilise les colonnes suivantes :
-
-| Colonne                  | Description                                   |
-| ------------------------ | --------------------------------------------- |
-| `id`                     | Identifiant unique (généré automatiquement)   |
-| `nom`, `prenom`, `email` | Identité du salarié                           |
-| `formation`              | Intitulé de la formation Secufer              |
-| `date_delivrance`        | Date de délivrance initiale (`YYYY-MM-DD`)    |
-| `date_dernier_recyclage` | Date du dernier recyclage, si applicable      |
-| `notes`                  | Commentaires libres                           |
+Le catalogue (`backlink_assistant/catalog.py`) liste des plateformes
+légitimes avec leurs métadonnées : périmètre (généraliste / local / niche),
+coût, présence d'une API officielle, type de lien. Les types de lien marqués
+« inconnu » sont à vérifier au moment de la soumission (ils changent souvent).
 
 ## Tests
 
@@ -118,7 +71,13 @@ Le fichier CSV utilise les colonnes suivantes :
 python -m unittest discover -s tests -v
 ```
 
-## Licence
+## Architecture
 
-Usage interne Secufer. Voir <https://centre-secufer.fr> pour toute
-question relative aux formations et attestations.
+| Module | Rôle |
+| --- | --- |
+| `catalog.py`  | Catalogue d'annuaires + classement par thématique |
+| `analyze.py`  | Détection de thématique à partir d'une URL |
+| `listing.py`  | Génération des champs de fiche prêts à coller |
+| `db.py`       | Stockage local (SQLite) des sites et soumissions |
+| `server.py`   | Serveur web local (API JSON + fichiers statiques) |
+| `web/`        | Interface (HTML / CSS / JavaScript) |
